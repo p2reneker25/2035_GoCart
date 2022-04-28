@@ -21,4 +21,8 @@ public final class Constants {
         public static final int DRIVE_PWM_MOTOR_5 = 4;
         public static final int DRIVE_PWM_MOTOR_6 = 5;
     }
+    public static final class Controls{
+        public static final int Joystick_USB_PORT = 0;
+    }
 }
+
