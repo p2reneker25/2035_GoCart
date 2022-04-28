@@ -23,7 +23,10 @@ public class DriveTrain extends CommandBase{
         motor6 = new VictorSP(Constants.DriveTrain.DRIVE_PWM_MOTOR_6);
         gearbox1 = new MotorControllerGroup(motor1, motor2, motor3);
         gearbox2 = new MotorControllerGroup(motor4, motor5, motor6);
-        
+    }
+    public void CarDrive(double throttle){
+        gearbox1.set(throttle);
+        gearbox2.set(throttle);
     }
 
     
