@@ -23,6 +23,7 @@ public final class Constants {
     }
     public static final class Controls{
         public static final int Joystick_USB_PORT = 0;
+        public static final boolean IsHeadless = false;
     }
 }
 
