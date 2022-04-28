@@ -23,7 +23,6 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-// public static FakeDS fakeDS;
   private Thread dsThread = new Thread(
     () -> {
       DatagramSocket socket;
@@ -40,7 +39,7 @@ public class Robot extends TimedRobot {
       short sendCount = 0;
       int initCount = 0;
       while (!Thread.currentThread().isInterrupted()) {
-        if (m_robotContainer.testbenchSubsystem.keySwitch.get() == false) {
+        if (DigitalInput(Constants.Controls.CONTROLS_ENABLE_DIO).get() == true) {
           try {
             Thread.sleep(20);
             generateEnabledDsPacket(sendData, sendCount++);
