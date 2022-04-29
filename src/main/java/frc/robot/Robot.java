@@ -9,6 +9,8 @@ import java.net.SocketException;
 import java.net.InetSocketAddress;
 import java.io.File;
 import java.io.IOException;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -21,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
+  private DigitalInput headless = new DigitalInput(Constants.Controls.CONTROLS_ENABLE_DIO);
   private RobotContainer m_robotContainer;
   private Thread dsThread = new Thread(
     () -> {
@@ -39,7 +41,7 @@ public class Robot extends TimedRobot {
       short sendCount = 0;
       int initCount = 0;
       while (!Thread.currentThread().isInterrupted()) {
-        if (DigitalInput(Constants.Controls.CONTROLS_ENABLE_DIO).get() == true) {
+        if (headless.get() == true && Constants.Controls.IsHeadless) {
           try {
             Thread.sleep(20);
             generateEnabledDsPacket(sendData, sendCount++);

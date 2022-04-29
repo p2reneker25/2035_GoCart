@@ -3,9 +3,10 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class DriveTrain extends CommandBase{
+public class DriveTrain extends SubsystemBase{
     private VictorSP motor1;
     private VictorSP motor2;
     private VictorSP motor3;
@@ -28,6 +29,4 @@ public class DriveTrain extends CommandBase{
         gearbox1.set(throttle);
         gearbox2.set(throttle);
     }
-
-    
 }
