@@ -26,7 +26,7 @@ public class RobotContainer {
   private final Joystick j_joystick = new Joystick(Constants.Controls.Joystick_USB_PORT);
   private final DriveTrain m_driveTrain = new DriveTrain();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private final AnalogInput a_analog = new AnalogInput(Constants.Controls.CONTROLS_PEDAL_POTENTIOMETER)
+  private final AnalogInput a_analog = new AnalogInput(Constants.Controls.CONTROLS_PEDAL_POTENTIOMETER);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
      
