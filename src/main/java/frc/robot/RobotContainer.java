@@ -26,7 +26,7 @@ public class RobotContainer {
   private final Joystick j_joystick = new Joystick(Constants.Controls.Joystick_USB_PORT);
   private final DriveTrain m_driveTrain = new DriveTrain();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private final AnalogInput a_analog = new AnalogInput(channel)
+  private final AnalogInput a_analog = new AnalogInput(Constants.Controls.CONTROLS_PEDAL_POTENTIOMETER)
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
      
@@ -42,7 +42,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    m_driveTrain.setDefaultCommand(new Drive(m_driveTrain, j_joystick));
+    m_driveTrain.setDefaultCommand(new Drive(m_driveTrain, j_joystick, a_analog));
   }
 
   /**
