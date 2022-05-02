@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.Drive;
@@ -25,7 +26,7 @@ public class RobotContainer {
   private final Joystick j_joystick = new Joystick(Constants.Controls.Joystick_USB_PORT);
   private final DriveTrain m_driveTrain = new DriveTrain();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  
+  private final AnalogInput a_analog = new AnalogInput(channel)
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
      

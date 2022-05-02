@@ -28,6 +28,8 @@ public final class Constants {
         public static final int CONTROLS_DISABLE_DIO = 1;
         public static final int CONTROLS_GEAR_UP = 2;
         public static final int CONTROLS_GEAR_DN = 3;
+        public static final int CON
+        
     }
 }
 
