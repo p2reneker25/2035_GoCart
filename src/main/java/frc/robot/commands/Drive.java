@@ -35,8 +35,9 @@ public class Drive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    System.out.println(pedal.getValue());
     if(Constants.Controls.IsHeadless){
-      m_drivetrain.CarDrive(j_joystick.getX());
+      m_drivetrain.CarDrive(pedal.getValue());
     }else{
     m_drivetrain.CarDrive(j_joystick.getX());
     }
