@@ -8,22 +8,27 @@ import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 /** An example command that uses an example subsystem. */
 public class Drive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private DriveTrain m_drivetrain;
   private Joystick j_joystick;
   private AnalogInput pedal;
+  private DigitalInput gear_fwd;
+  private DigitalInput gear_rev;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Drive(DriveTrain dt, Joystick j, AnalogInput a) {
+  public Drive(DriveTrain dt, Joystick j, AnalogInput a, DigitalInput f, DigitalInput r) {
     m_drivetrain = dt;
     j_joystick = j;
     pedal = a;
+    gear_fwd = f;
+    gear_rev = r;
     // Use addRequirements() here to declare subsystem dependencies.
     //addRequirements(m_drivetrain);
   }
@@ -37,9 +42,21 @@ public class Drive extends CommandBase {
   public void execute() {
     System.out.println(pedal.getVoltage());
     if(Constants.Controls.IsHeadless){
+      //using both statements for redundancy against wiring errors.
+      if(gear_fwd.get() && gear_rev.get()){
+        System.out.println("Both gears active; check wiring");
+      }
+      else if(gear_fwd.get()){
       m_drivetrain.CarDrive((double)pedal.getVoltage());
+      }
+      else if(gear_rev.get()){
+        m_drivetrain.CarDrive((double)pedal.getVoltage());
+      }
+      else{
+        System.out.println("No gears active; check wiring");
+      }
     }else{
-    m_drivetrain.CarDrive(j_joystick.getX());
+    m_drivetrain.CarDrive(j_joystick.getY());
     }
   }
 

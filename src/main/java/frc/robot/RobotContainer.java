@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.Drive;
@@ -23,10 +24,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final DigitalInput i_fwd = new DigitalInput(Constants.Controls.CONTROLS_GEAR_FWD);
+  private final DigitalInput i_rev = new DigitalInput(Constants.Controls.CONTROLS_GEAR_REV);
+  private final AnalogInput a_analog = new AnalogInput(Constants.Controls.CONTROLS_PEDAL_POTENTIOMETER);
   private final Joystick j_joystick = new Joystick(Constants.Controls.Joystick_USB_PORT);
   private final DriveTrain m_driveTrain = new DriveTrain();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private final AnalogInput a_analog = new AnalogInput(Constants.Controls.CONTROLS_PEDAL_POTENTIOMETER);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
      
@@ -42,7 +45,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    m_driveTrain.setDefaultCommand(new Drive(m_driveTrain, j_joystick, a_analog));
+    m_driveTrain.setDefaultCommand(new Drive(m_driveTrain, j_joystick, a_analog, i_fwd, i_rev));
   }
 
   /**

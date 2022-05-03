@@ -26,8 +26,8 @@ public final class Constants {
         public static final boolean IsHeadless = false;
         public static final int CONTROLS_ENABLE_DIO = 0;
         public static final int CONTROLS_DISABLE_DIO = 1;
-        public static final int CONTROLS_GEAR_UP = 2;
-        public static final int CONTROLS_GEAR_DN = 3;
+        public static final int CONTROLS_GEAR_FWD = 2;
+        public static final int CONTROLS_GEAR_REV = 3;
         public static final int CONTROLS_PEDAL_POTENTIOMETER = 0;
         
     }

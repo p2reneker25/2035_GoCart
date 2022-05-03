@@ -44,9 +44,8 @@ public class Robot extends TimedRobot {
           try {
             Thread.sleep(20);
             generateEnabledDsPacket(sendData, sendCount++);
-            // ~50 disabled packets are required to make the robot actually enable
-            // 1 is definitely not enough.
-            if (initCount < 50) {
+           //brute force it
+            if (initCount < 66) {
               initCount++;
               sendData[3] = 0;
             }
