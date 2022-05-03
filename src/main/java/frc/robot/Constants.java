@@ -31,5 +31,13 @@ public final class Constants {
         public static final int CONTROLS_PEDAL_POTENTIOMETER = 0;
         
     }
+    public static final class Pneumatics{
+        public static final int PNEUMATICS_HORN = 0;
+        public static final int PNEUMATICS_LEFT_SHOCK_UP = 1;
+        public static final int PNEUMATICS_LEFT_SHOCK_DN = 2;
+        public static final int PNEUMATICS_RIGHT_SHOCK_UP = 3;
+        public static final int PNEUMATICS_RIGHT_SHOCK_DN = 4;
+    
+    }
 }
 
