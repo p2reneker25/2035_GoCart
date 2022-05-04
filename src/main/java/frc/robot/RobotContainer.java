@@ -33,7 +33,8 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
      
-    
+      m_driveTrain.setDefaultCommand(new Drive(m_driveTrain, j_joystick, a_analog, i_fwd, i_rev));
+
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -45,7 +46,6 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    m_driveTrain.setDefaultCommand(new Drive(m_driveTrain, j_joystick, a_analog, i_fwd, i_rev));
   }
 
   /**
