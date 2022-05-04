@@ -30,6 +30,7 @@ public class Drive extends CommandBase {
     gear_fwd = f;
     gear_rev = r;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(dt);
   }
 
   // Called when the command is initially scheduled.
