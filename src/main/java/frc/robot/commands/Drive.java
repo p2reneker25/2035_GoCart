@@ -47,10 +47,10 @@ public class Drive extends CommandBase {
         System.out.println("Both gears active; check wiring");
       }
       else if(gear_fwd.get()){
-      m_drivetrain.CarDrive((double)pedal.getVoltage());
+      m_drivetrain.CarDrive((double)pedal.getVoltage()/5);
       }
       else if(gear_rev.get()){
-        m_drivetrain.CarDrive((double)pedal.getVoltage());
+        m_drivetrain.CarDrive(-(double)pedal.getVoltage()/5);
       }
       else{
         System.out.println("No gears active; check wiring");

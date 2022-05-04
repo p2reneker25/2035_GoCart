@@ -31,4 +31,16 @@ public class Pneumatics extends SubsystemBase{
     public void rightShockDn(){
         right_shock.set(Value.kReverse);
     }
+    public void honk(){
+        horn.set(true);
+    }
+    public void unhonk(){
+        horn.set(false);
+    }
+    public void disableLeftShock(){
+        left_shock.set(Value.kOff);
+    }public void disableRightShock(){
+        right_shock.set(Value.kOff);
+    }
+ 
 }
