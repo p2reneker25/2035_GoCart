@@ -12,6 +12,7 @@ import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Pneumatics;
 import edu.wpi.first.wpilibj2.command.Command;
 
 
@@ -29,12 +30,13 @@ public class RobotContainer {
   private final AnalogInput a_analog = new AnalogInput(Constants.Controls.CONTROLS_PEDAL_POTENTIOMETER);
   private final Joystick j_joystick = new Joystick(Constants.Controls.Joystick_USB_PORT);
   private final DriveTrain m_driveTrain = new DriveTrain();
+  private final Pneumatics m_pneumatics = new Pneumatics();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-     
+      
       m_driveTrain.setDefaultCommand(new Drive(m_driveTrain, j_joystick, a_analog, i_fwd, i_rev));
-
+      
     // Configure the button bindings
     configureButtonBindings();
   }
