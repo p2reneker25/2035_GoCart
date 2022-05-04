@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Pneumatics;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -66,7 +65,7 @@ public class MoveShock extends CommandBase {
       m_pneumatics.disableLeftShock();
     }
     else{
-      m_pneumatics.disableLeftShock();
+      m_pneumatics.disableRightShock();
     }
   }
 
