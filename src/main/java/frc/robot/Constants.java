@@ -28,6 +28,8 @@ public final class Constants {
         public static final int CONTROLS_DISABLE_DIO = 1;
         public static final int CONTROLS_GEAR_FWD = 2;
         public static final int CONTROLS_GEAR_REV = 3;
+        public static final int CONTROLS_GEAR_HI = 4;
+        public static final int CONTROLS_GEAR_LO = 5;
         public static final int CONTROLS_PEDAL_POTENTIOMETER = 0;
         
     }
@@ -37,6 +39,10 @@ public final class Constants {
         public static final int PNEUMATICS_LEFT_SHOCK_DN = 2;
         public static final int PNEUMATICS_RIGHT_SHOCK_UP = 3;
         public static final int PNEUMATICS_RIGHT_SHOCK_DN = 4;
+        public static final int PNEUMATICS_GEARBOX_LEFT_HI = 5;
+        public static final int PNEUMATICS_GEARBOX_LEFT_LO = 6;
+        public static final int PNEUMATICS_GEARBOX_RIGHT_HI = 7;
+        public static final int PNEUMATICS_GEARBOX_RIGHT_LO = 8;
     
     }
 }
