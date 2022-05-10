@@ -42,7 +42,7 @@ public final class Constants {
         public static final int PNEUMATICS_GEARBOX_LEFT_HI = 5;
         public static final int PNEUMATICS_GEARBOX_LEFT_LO = 6;
         public static final int PNEUMATICS_GEARBOX_RIGHT_HI = 7;
-        public static final int PNEUMATICS_GEARBOX_RIGHT_LO = 8;
+        public static final int PNEUMATICS_GEARBOX_RIGHT_LO = 7;
     
     }
 }

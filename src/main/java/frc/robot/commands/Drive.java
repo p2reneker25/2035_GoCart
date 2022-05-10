@@ -17,6 +17,9 @@ public class Drive extends CommandBase {
   private AnalogInput pedal;
   private DigitalInput gear_fwd;
   private DigitalInput gear_rev;
+  private DigitalInput enable_button;
+  private AnalogInput gear;
+  private boolean isEnabled;
 
   /**
    * Creates a new ExampleCommand.
@@ -29,35 +32,42 @@ public class Drive extends CommandBase {
     pedal = a;
     gear_fwd = f;
     gear_rev = r;
+    isEnabled = false;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(dt);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    gear = new AnalogInput(1);
+    enable_button = new DigitalInput(Constants.Controls.CONTROLS_ENABLE_DIO);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(enable_button.get()){
+      isEnabled = !isEnabled;
+    }
     System.out.println(pedal.getVoltage());
-    if(Constants.Controls.IsHeadless){
-      //using both statements for redundancy against wiring errors.
-      if(gear_fwd.get() && gear_rev.get()){
-        System.out.println("Both gears active; check wiring");
-      }
-      else if(gear_fwd.get()){
-      m_drivetrain.CarDrive((double)pedal.getVoltage()/5);
-      }
-      else if(gear_rev.get()){
-        m_drivetrain.CarDrive(-(double)pedal.getVoltage()/5);
+    if(Constants.Controls.IsHeadless && isEnabled){
+      System.out.println("Gear" + gear.getVoltage());
+      System.out.println("REV Gear" + gear_rev.get());
+
+      //using both statements for redund ancy against wiring errors.
+      
+      if(gear.getVoltage()<2.5){
+      m_drivetrain.CarDrive((((double)pedal.getVoltage())-2)/2);
       }
       else{
-        System.out.println("No gears active; check wiring");
+        m_drivetrain.CarDrive(-(((double)pedal.getVoltage())-2)/2);
       }
     }else{
-    m_drivetrain.CarDrive(j_joystick.getY());
+      m_drivetrain.CarDrive(-j_joystick.getY());
+
     }
+
   }
 
   // Called once the command ends or is interrupted.

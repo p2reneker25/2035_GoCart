@@ -22,8 +22,11 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+
   private DigitalInput headless = new DigitalInput(Constants.Controls.CONTROLS_ENABLE_DIO);
   private RobotContainer m_robotContainer;
+  private boolean isEnabled = true;
+  
   private Thread dsThread = new Thread(
     () -> {
       DatagramSocket socket;
@@ -97,6 +100,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
