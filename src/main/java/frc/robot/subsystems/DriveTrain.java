@@ -3,6 +3,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.commands.Drive;
 
 public class DriveTrain extends SubsystemBase{
     private VictorSP motor1;
@@ -23,8 +24,14 @@ public class DriveTrain extends SubsystemBase{
         gearbox1 = new MotorControllerGroup(motor1, motor2, motor3);
         gearbox2 = new MotorControllerGroup(motor4, motor5, motor6);
     }
-    public void CarDrive(double throttle){
+    public void CarDrive(double throttle, boolean isEnabled){
+        if(isEnabled){
         gearbox1.set(throttle);
         gearbox2.set(throttle);
+        }
+        else{
+            gearbox1.disable();
+            gearbox2.disable();
+        }
     }
 }

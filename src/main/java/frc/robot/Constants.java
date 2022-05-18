@@ -24,7 +24,7 @@ public final class Constants {
     public static final class Controls{
         public static final int Joystick_USB_PORT = 0;
         public static final boolean IsHeadless = true;
-        public static final int CONTROLS_ENABLE_DIO = 0;
+        public static final int CONTROLS_ENABLE_ANAL = 3;
         public static final int CONTROLS_DISABLE_DIO = 1;
         public static final int CONTROLS_GEAR_FWD = 2;
         public static final int CONTROLS_GEAR_REV = 3;

@@ -17,9 +17,9 @@ public class Drive extends CommandBase {
   private AnalogInput pedal;
   private DigitalInput gear_fwd;
   private DigitalInput gear_rev;
-  private DigitalInput enable_button;
+  private AnalogInput enable_button;
   private AnalogInput gear;
-  private boolean isEnabled;
+  public boolean isEnabled;
 
   /**
    * Creates a new ExampleCommand.
@@ -32,7 +32,11 @@ public class Drive extends CommandBase {
     pedal = a;
     gear_fwd = f;
     gear_rev = r;
-    isEnabled = false;
+    isEnabled = true;
+    gear = new AnalogInput(1);
+    enable_button = new AnalogInput(Constants.Controls.CONTROLS_ENABLE_ANAL);
+
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(dt);
   }
@@ -40,32 +44,29 @@ public class Drive extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    gear = new AnalogInput(1);
-    enable_button = new DigitalInput(Constants.Controls.CONTROLS_ENABLE_DIO);
+    isEnabled = true;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(enable_button.get()){
-      isEnabled = !isEnabled;
+    System.out.println("Enabled = " + isEnabled);
+    if(enable_button.getVoltage() > 2.5){
+      isEnabled = false;
     }
     System.out.println(pedal.getVoltage());
-    if(Constants.Controls.IsHeadless && isEnabled){
+    if(Constants.Controls.IsHeadless){
       System.out.println("Gear" + gear.getVoltage());
       System.out.println("REV Gear" + gear_rev.get());
 
       //using both statements for redund ancy against wiring errors.
       
       if(gear.getVoltage()<2.5){
-      m_drivetrain.CarDrive((((double)pedal.getVoltage())-2)/2);
+      m_drivetrain.CarDrive((double)pedal.getVoltage()/2, isEnabled);
       }
       else{
-        m_drivetrain.CarDrive(-(((double)pedal.getVoltage())-2)/2);
+        m_drivetrain.CarDrive(-(double)pedal.getVoltage()/2, isEnabled);
       }
-    }else{
-      m_drivetrain.CarDrive(-j_joystick.getY());
-
     }
 
   }
