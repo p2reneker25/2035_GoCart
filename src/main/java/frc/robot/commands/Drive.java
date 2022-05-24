@@ -6,6 +6,7 @@ package frc.robot.commands;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -18,6 +19,7 @@ public class Drive extends CommandBase {
   private DigitalInput gear_fwd;
   private DigitalInput gear_rev;
   private AnalogInput enable_button;
+  private AnalogInput disable_button;
   private AnalogInput gear;
   public boolean isEnabled;
 
@@ -32,9 +34,10 @@ public class Drive extends CommandBase {
     pedal = a;
     gear_fwd = f;
     gear_rev = r;
-    isEnabled = true;
+    isEnabled = false;
     gear = new AnalogInput(1);
     enable_button = new AnalogInput(Constants.Controls.CONTROLS_ENABLE_ANAL);
+    disable_button = new AnalogInput(Constants.Controls.CONTROLS_DISABLE_ANAL);
 
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -44,32 +47,38 @@ public class Drive extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    isEnabled = true;
+    isEnabled = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     System.out.println("Enabled = " + isEnabled);
-    if(enable_button.getVoltage() > 2.5){
+    if(disable_button.getVoltage() > 2.5){
       isEnabled = false;
     }
-    System.out.println(pedal.getVoltage());
-    if(Constants.Controls.IsHeadless){
-      System.out.println("Gear" + gear.getVoltage());
-      System.out.println("REV Gear" + gear_rev.get());
+    if(enable_button.getVoltage() > 2.5){
+      isEnabled = true;
+    }
+    
+
+    //System.out.println(pedal.getVoltage());
+    SmartDashboard.putNumber("Pedal Voltage", pedal.getVoltage());
+      // System.out.println("Gear" + gear.getVoltage());
+      // System.out.println("REV Gear" + gear_rev.get());
 
       //using both statements for redund ancy against wiring errors.
-      
+      System.out.println("Pedal Value " + ((1.8-(double)(pedal.getVoltage()))));
+
       if(gear.getVoltage()<2.5){
-      m_drivetrain.CarDrive((double)pedal.getVoltage()/2, isEnabled);
+      m_drivetrain.CarDrive(((1.8-(double)(pedal.getVoltage())))*0.64, isEnabled);
       }
       else{
-        m_drivetrain.CarDrive(-(double)pedal.getVoltage()/2, isEnabled);
+        m_drivetrain.CarDrive((-(1.8-(double)(pedal.getVoltage())))*0.64, isEnabled);
       }
     }
 
-  }
+  
 
   // Called once the command ends or is interrupted.
   @Override

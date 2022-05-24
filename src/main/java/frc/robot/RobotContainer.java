@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ShiftGear;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Pneumatics;
@@ -36,6 +37,7 @@ public class RobotContainer {
   public RobotContainer() {
       
       m_driveTrain.setDefaultCommand(new Drive(m_driveTrain, j_joystick, a_analog, i_fwd, i_rev));
+      m_pneumatics.setDefaultCommand(new ShiftGear(m_pneumatics));
       
     // Configure the button bindings
     configureButtonBindings();

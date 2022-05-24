@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
       short sendCount = 0;
       int initCount = 0;
       while (!Thread.currentThread().isInterrupted()) {
-        if (!Constants.Controls.IsHeadless) {
+        if (Constants.Controls.IsHeadless) {
           try {
             Thread.sleep(20);
             generateEnabledDsPacket(sendData, sendCount++);

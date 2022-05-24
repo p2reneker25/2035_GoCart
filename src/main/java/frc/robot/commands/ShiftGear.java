@@ -5,26 +5,30 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.Pneumatics;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class MoveShock extends CommandBase {
+public class ShiftGear extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Pneumatics m_pneumatics;
-  private final boolean cylinder;
-  private final boolean position;
   private Timer timer;
+  private AnalogInput pos1;
+  private AnalogInput pos2;
+  private AnalogInput pos3;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public MoveShock(Pneumatics p, boolean shock, boolean pos) {
+  public ShiftGear(Pneumatics p) {
     m_pneumatics = p;
-    cylinder = shock;
-    position = pos;
+    pos1 = new AnalogInput(4);
+    pos2 = new AnalogInput(5);
+    pos3 = new AnalogInput(6);
     timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(p);
@@ -40,38 +44,40 @@ public class MoveShock extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(cylinder == true){ //left because im a lefty...
-      if(position == true){ //go up
-        m_pneumatics.leftShockUp();
-      }
-      else{ //down
-        m_pneumatics.leftShockDn();
-      }
+    if(pos1.getVoltage()>2.5){
+      m_pneumatics.setGearHi();
+      System.out.println("pos1");
+      SmartDashboard.putString("Gear POS", "pos1");
     }
-    else{ //right
-      if(position == true){ //up
-        m_pneumatics.rightShockUp();
-      }
-      else{ //down
-        m_pneumatics.rightShockDn();
-      }
+    
+    else if(pos3.getVoltage() > 2.5){
+      m_pneumatics.setGearLo();
+      System.out.println("pos3");
+      SmartDashboard.putString("Gear POS", "pos3");
+
+
     }
+    else{
+      m_pneumatics.disableGearbox();
+      System.out.println("pos2");
+      SmartDashboard.putString("Gear POS", "pos2");
+
+    }
+    SmartDashboard.putNumber("S1 Voltage", pos1.getVoltage());
+    SmartDashboard.putNumber("S2 Voltage", pos2.getVoltage());
+    SmartDashboard.putNumber("S3 Voltage", pos3.getVoltage());
+
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    if(cylinder == true){
-      m_pneumatics.disableLeftShock();
-    }
-    else{
-      m_pneumatics.disableRightShock();
-    }
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.get() > 2;
+    return false;  
   }
 }
